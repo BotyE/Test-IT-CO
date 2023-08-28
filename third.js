@@ -19,7 +19,7 @@ const findSumBin = (arr, sum) => {
 }
 
 const findNum = (arr, n, start, end) => {
-  if(end < 1 || end -1 === start) return -1;
+  if(end < start || end - 1 === start) return -1;
   const center = Math.floor(( start + ( end - start ) / 2 ));
   if (n == arr[center]) return center; 
   return (n > arr[center]) ? findNum(arr, n, center, end) : findNum(arr, n, start, center);
