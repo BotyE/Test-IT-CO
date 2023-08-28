@@ -1,34 +1,26 @@
 
 
 const findSum = (arr, sum) => {
-
     for(let i = 0; i < arr.length - 1; i++) {
         let needAdd = sum - arr[i];
-        let addIndex = arr.findIndex( (item, index) => item === needAdd && index !== i)
-        if(addIndex !== -1)
-            return [i, addIndex]
+        let addIndex = arr.findIndex( (item, index) => item === needAdd && index !== i);
+        if(addIndex !== -1) return [i, addIndex];
     }
-
     return [];
 }
 
 const findSumBin = (arr, sum) => {
-
     for(let i = 0; i < arr.length - 1; i++) {
         let needAdd = sum - arr[i];
-        let index = findNum(arr, needAdd, i, arr.length)
-        if(index !== -1)
-            return [i, index]
-
+        let index = findNum(arr, needAdd, i, arr.length);
+        if(index !== -1) return [i, index];
     }
-    return []
+    return [];
 }
 
 const findNum = (arr, n, start, end) => {
   if(end < 1 || end -1 === start) return -1;
-
   const center = Math.floor(( start + ( end - start ) / 2 ));
-
   if (n == arr[center]) return center; 
   return (n > arr[center]) ? findNum(arr, n, center, end) : findNum(arr, n, start, center);
 }
@@ -37,6 +29,13 @@ const findNum = (arr, n, start, end) => {
 //Получаем разницу между суммой и числом.
 //Ищем недостающую число среди элементов.
 //Если находим, то возвращаем массив из 2 чисел, иначе идем дальше по массиву.
+
+//Описание 2 варианта:
+//Мы берем каждый элемент массива. 
+//Получаем разницу между суммой и числом.
+//Так как список идет в порядке возрастания, то мы можем находить элемент бинарным поиском.
+//На каждом этапе мы будем брать число на центральной позиции некоторого отрезка, если оно подходит, то вернем индекс.
+//Если не подошло, то дальше берем другой отрезок, в зависимости от того больше или меньше искомого.
 
 console.log(findSumBin([1,2,3,4,5,6], 4))
 console.log(findSumBin([1,2,3,4,5,6], 44))
